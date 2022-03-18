@@ -18,10 +18,10 @@ const RemoteState = (props) => {
     const getRemotePosts = () => {
         fetch('https://gnews.io/api/v4/search?q=watches&token=16d81f4d255dcff454c6db88138338d8&lang=en')
             .then(x => x.json())
-            .then(x => dispatch({
+            .then(posts => dispatch({
                 type: "GET_REMOTE_POSTS",
                 payload: {
-                    data: x.articles?.map(x => {
+                    data: posts.articles?.map(x => {
                         return {
                             ...x, id: uuidv4(),
                         }
@@ -40,9 +40,15 @@ const RemoteState = (props) => {
     const getRemotePlusPosts = () => {
         fetch(`${baseUrl}RemotePlus/GetPost`)
             .then(x => x.json())
-            .then(x => dispatch({
+            .then(posts => dispatch({
                 type: "GET_REMOTE_PLUS_POSTS",
-                payload: { data: x, errorRemotePlus: false }
+                payload: {
+                    data: posts?.map(x => {
+                        return {
+                            ...x, id: uuidv4(),
+                        }
+                    }), errorRemotePlus: false
+                }
             }))
             .catch(() => {
                 dispatch({

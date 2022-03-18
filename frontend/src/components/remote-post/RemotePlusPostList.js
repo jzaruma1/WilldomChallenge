@@ -12,12 +12,10 @@ const RemotePlusPostList = () => {
 
     return (
         <div className='mt-10'>
-            <div>
-                {errorRemotePlus ?
-                    <Alert color="primary">
-                        Error getting list of posts
-                    </Alert> : null}
-            </div>
+            {errorRemotePlus ?
+                <Alert color="primary">
+                    Error getting list of posts
+                </Alert> : null}
             <Row>
                 {remotePlusPosts.map(postItem => (
                     <PostCard key={postItem.id} post={postItem} />

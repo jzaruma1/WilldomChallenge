@@ -1,18 +1,22 @@
 import React, { useContext, useEffect } from 'react';
-import { Row } from "reactstrap";
+import { Alert, Row } from "reactstrap";
 import RemoteContext from "../../context/remote-post/RemoteContext";
 import PostCard from '../shared/PostCard';
 
 const RemotePostList = () => {
-    const { getRemotePosts, remotePosts } = useContext(RemoteContext);
+    const { getRemotePosts, remotePosts, errorRemote } = useContext(RemoteContext);
     useEffect(() => {
         getRemotePosts()
     }, [])
 
     return (
         <div className='mt-10'>
+            {errorRemote ?
+                <Alert color="primary">
+                    Error getting list of posts
+                </Alert> : null}
             <Row>
-                {remotePosts.map(postItem => (
+                {(remotePosts || []).map(postItem => (
                     <PostCard key={postItem.id} post={postItem} />
                 ))}
             </Row>
