@@ -1,7 +1,8 @@
 import React from "react";
-import { Col, Card, CardBody, CardSubtitle, CardText, Button, CardImg, CardFooter } from "reactstrap";
+import { Col, Card, CardBody, CardSubtitle, CardText, Button, CardImg, CardFooter, Badge } from "reactstrap";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
+import * as timeago from 'timeago.js';
 
 const PostCard = ({ post, deletePost }) => {
     const { pathname } = useLocation();
@@ -14,7 +15,7 @@ const PostCard = ({ post, deletePost }) => {
                 <AiFillDelete />
             </Button>
             <Link to={`edit/${post.id}`} >
-                <button  className='bg-green-400 hover:bg-green-500 text-white rounded py-2 px-4  mr-2 float-right'>
+                <button className='bg-green-400 hover:bg-green-500 text-white rounded py-2 px-4  mr-2 float-right'>
                     <AiFillEdit />
                 </button>
             </Link>
@@ -32,14 +33,18 @@ const PostCard = ({ post, deletePost }) => {
                         top
                         width="100%"
                     />
-                    <div  className="body-post">
+                    <Badge color="dark" className="publishedAt bg-cyan-700 ml-4">
+                        {timeago.format(post.publishedAt)}
+                    </Badge>
+                    <div className="body-post">
                         <CardBody>
                             <CardSubtitle
-                                className="mb-2 text-muted"
+                                className="mb-2 text-muted font-bold"
                                 tag="h6">
                                 {post.title}
+
                             </CardSubtitle>
-                            <CardText className="">
+                            <CardText>
                                 {post.description}
                             </CardText>
                         </CardBody>

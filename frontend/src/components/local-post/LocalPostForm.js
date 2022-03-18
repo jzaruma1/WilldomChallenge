@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { LocalPostContext } from '../../context/local-post/LocalPostContext';
+import { LocalPostContext } from '../../context/local-post/LocalPostState';
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 } from "uuid";
 const LocalPostForm = () => {
@@ -11,7 +11,7 @@ const LocalPostForm = () => {
     const navigate = useNavigate();
     const params = useParams();
     const { addPost, editPost, posts } = useContext(LocalPostContext);
-    const [post, setPost] = useState({ id: '', title: '', content: '', image: '' });
+    const [post, setPost] = useState({ id: '', title: '', description: '', image: '', publishedAt: new Date() });
 
 
     const handleChange = (e) => {

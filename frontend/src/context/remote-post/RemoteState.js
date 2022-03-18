@@ -3,45 +3,52 @@ import RemoteReducer from "./RemoteReducer";
 import RemoteContext from "./RemoteContext";
 import { v4 as uuidv4 } from 'uuid';
 
+const baseUrl = "https://localhost:44361/api/";
+
 const RemoteState = (props) => {
 
     const initialState = {
         remotePosts: [],
-        remotePlusPosts: []
+        remotePlusPosts: [],
+        errorRemote: false,
+        errorRemotePlus: false
     }
     const [state, dispatch] = useReducer(RemoteReducer, initialState)
 
     const getRemotePosts = () => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
+        fetch('https://gnews.io/api/v4/search?q=watches&token=16d81f4d255dcff454c6db88138338d8&lang=en')
             .then(x => x.json())
             .then(x => dispatch({
                 type: "GET_REMOTE_POSTS",
-                payload: x?.map(x => {
-                    return {
-                        ...x, id: uuidv4(),
-                        image: "https://i2-prod.liverpoolecho.co.uk/incoming/article23413450.ece/ALTERNATES/s1200/0_Set-of-Beatles-watches-selling-for-16000.jpg",
-                        description: "Something went wrong, please try again later.\nSign up for our what's on newsletter for the perfect guide to making the most of your free time\nA set of four Beatles themed watches is available to purchase - for £16,000.\nAfter producing four successful... [1941 chars]"
-                    }
-                })
+                payload: {
+                    data: x.articles?.map(x => {
+                        return {
+                            ...x, id: uuidv4(),
+                        }
+                    }), errorRemote: false
+                }
             }))
-            .catch(() => {
-                alert('failed to fetch');
-            });;
+            .catch((error) => {
+                console.log(error)
+                dispatch({
+                    type: "GET_REMOTE_POSTS",
+                    payload: { data: [], errorRemote: true }
+                })
+            });
     }
 
     const getRemotePlusPosts = () => {
-        fetch('https://localhost:44361/api/RemotePlus/GetPost')
+        fetch(`${baseUrl}RemotePlus/GetPost`)
             .then(x => x.json())
             .then(x => dispatch({
                 type: "GET_REMOTE_PLUS_POSTS",
-                payload: x
+                payload: { data: x, errorRemotePlus: false }
             }))
             .catch(() => {
                 dispatch({
                     type: "GET_REMOTE_PLUS_POSTS",
-                    payload: []
+                    payload: { data: [], errorRemotePlus: true }
                 })
-                alert('failed to fetch remote plus');
             });;
     }
 
@@ -50,6 +57,8 @@ const RemoteState = (props) => {
             {
                 remotePosts: state.remotePosts,
                 remotePlusPosts: state.remotePlusPosts,
+                errorRemotePlus: state.errorRemotePlus,
+                errorRemote: state.errorRemote,
                 getRemotePosts,
                 getRemotePlusPosts
             }

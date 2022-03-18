@@ -5,7 +5,7 @@ import LocalPostForm from './components/local-post/LocalPostForm';
 import LocalPostList from './components/local-post/LocalPostList';
 import { Route, Routes } from 'react-router-dom';
 import React from 'react';
-import { LocalPostContextProvider } from "./context/local-post/LocalPostContext";
+import { LocalPostState } from "./context/local-post/LocalPostState";
 import RemoteState from "./context/remote-post/RemoteState";
 import RemotePostList from './components/remote-post/RemotePostList';
 import RemotePlusPostList from './components/remote-post/RemotePlusPostList';
@@ -15,7 +15,7 @@ function App() {
     <div>
       <div className='h-screen p-10'>
         <div className='container mx-auto h-full'>
-          <LocalPostContextProvider>
+          <LocalPostState>
             <Heading />
             <RemoteState>
               <Routes>
@@ -26,7 +26,7 @@ function App() {
                 <Route path="edit/:id" element={<LocalPostForm />} />
               </Routes>
             </RemoteState>
-          </LocalPostContextProvider>
+          </LocalPostState>
         </div>
       </div>
     </div>

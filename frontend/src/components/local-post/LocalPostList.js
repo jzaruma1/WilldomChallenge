@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { LocalPostContext } from '../../context/local-post/LocalPostContext';
+import { LocalPostContext } from '../../context/local-post/LocalPostState';
 import { Link } from 'react-router-dom';
 import { Row } from "reactstrap";
 

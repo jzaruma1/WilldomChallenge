@@ -22,5 +22,12 @@ body {
 .footer-post{
   border-style: none;
   position: absolute;
-  top: 0%;
+  top: 90%;
+  right: 0;
+}
+
+.publishedAt{
+  position: absolute;
+  top: 55%;
+  font-weight: bold;
 }

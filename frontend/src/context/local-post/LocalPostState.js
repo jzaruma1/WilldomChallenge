@@ -12,7 +12,7 @@ export const LocalPostContext = createContext(
 );
 
 
-export const LocalPostContextProvider = ({ children }) => {
+export const LocalPostState = ({ children }) => {
 
     const [state, dispatch] = useReducer(localPostReducer, initialState)
 

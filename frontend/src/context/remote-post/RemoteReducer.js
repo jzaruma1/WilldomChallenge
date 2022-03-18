@@ -7,12 +7,14 @@ export default (state, action) => {
         case "GET_REMOTE_POSTS":
             return {
                 ...state,
-                remotePosts: payload
+                remotePosts: payload.data,
+                errorRemote: payload.errorRemote
             }
         case "GET_REMOTE_PLUS_POSTS":
             return {
                 ...state,
-                remotePlusPosts: payload
+                remotePlusPosts: payload.data,
+                errorRemotePlus: payload.errorRemotePlus
             }
         default:
             break;
