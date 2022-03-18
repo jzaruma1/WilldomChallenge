@@ -20,7 +20,6 @@ npm install
 npm start
 `
 </code></pre>
-===========> Los mismos pasos pueden ejecutarse en Windows <==============
 
 ### Resultado
 
