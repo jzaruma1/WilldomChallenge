@@ -1,0 +1,26 @@
+body {
+  background: #202124 !important;
+}
+
+.link-item{
+  text-decoration: none;
+}
+
+.card-post{
+  max-height: 30rem;
+  height: 30rem;
+}
+
+.img-post {
+  height: 60%;
+}
+
+.body-post {
+  height: 30%;
+}
+
+.footer-post{
+  border-style: none;
+  position: absolute;
+  top: 0%;
+}

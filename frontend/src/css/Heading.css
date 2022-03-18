@@ -1,0 +1,13 @@
+
+.bg-row{
+    background: #202124 !important;
+  }
+  
+  .bg-col{
+    background: #202124 !important;
+  }
+
+  .active {
+    color: #ffffff !important;
+    background: #4F7892 !important;
+  }
